@@ -6,6 +6,7 @@ class User
          :recoverable, :rememberable, :validatable
 
   ## Database authenticatable
+  field :username,           type: String
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 
