@@ -43,3 +43,5 @@ group :development, :test do
 end
 
 gem 'mongoid', '~> 4.0.0'
+
+gem 'devise'
