@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <%= current_user.username %>
+  <%= link_to t('layout.menu.buttons.logout'), destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to t('layout.menu.buttons.login'), new_user_session_path %>
+<% end %>
