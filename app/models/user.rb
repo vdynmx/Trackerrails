@@ -34,8 +34,9 @@ class User
   # field :instant_delete, type: Boolean # seems useless
   # field :active, type: Integer # ?
   # field :debug, type: Integer # ?
-  field :recover, type: Boolean
   # field :avatar_type, type: String # seems useless
+  field :recover, type: Boolean
+  # # # # # # #
 
   # RELATIONS
   has_one :user_stat # IMPORTANT! EXPLOARE BETTER RELATION TYPE HERE

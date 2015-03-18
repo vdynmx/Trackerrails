@@ -1,6 +1,10 @@
 class Track
   include Mongoid::Document
 
+  # SCOPES
+  scope :owned_by, ->(owner_id) { where(user_id: owner_id) }
+  # # # # #
+
   # CUSTOM FIELDS
   # column "ip", :string # ?
   field :title, type: String
