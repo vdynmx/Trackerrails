@@ -15,6 +15,10 @@ class User
   field :reset_password_sent_at, type: Time
   # # # # # # # #
 
+  # CARRIERWAVE
+  mount_uploader :avatar, AvatarUploader
+  # # # # # # #
+
   # CUSTOM FIELDS
   field :member_since, type: DateTime
   field :last_seen, type: DateTime
