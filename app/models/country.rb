@@ -8,7 +8,7 @@ class Country
   # # # # # # #
 
   # RELATIONS
-  belongs_to_many :users
+  has_many :users
   # # # # # #
 
 end
