@@ -38,7 +38,7 @@ class User
   # field :avatar_type, type: String # seems useless
 
   # RELATIONS
-  has_one :achivement # IMPORTANT! EXPLOARE BETTER RELATION TYPE HERE
+  has_one :user_stat # IMPORTANT! EXPLOARE BETTER RELATION TYPE HERE
   belongs_to :country
   has_many :tracks
   # # # # # # # # #

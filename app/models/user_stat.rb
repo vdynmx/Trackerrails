@@ -1,4 +1,4 @@
-class Achivement
+class UserStat
   include Mongoid::Document
 
   field :distance, type: Float
