@@ -1,37 +1,41 @@
 class User
   include Mongoid::Document
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :validatable
+
+  # DEVISE FIELDS
   ## Database authenticatable
   field :username,           type: String
-  field :email,              type: String, default: ""
-  field :encrypted_password, type: String, default: ""
-
+  field :email,              type: String
+  field :encrypted_password, type: String
+  #
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time
+  # # # # # # # #
 
-  ## Rememberable
-  field :remember_created_at, type: Time
+  # CUSTOM FIELDS
+  field :member_since, type: DateTime
+  field :last_seen, type: DateTime
+  field :role, type: String # can be one of ['admin', 'customer']
+  field :activation, type: String # ?
+  field :profile_key, type: String # ?
+  field :profile_views, type: Integer # should be replaced with live statistic
+  field :tracks_count, type: Integer # should be replaced with live statistic
+  field :news_count, type: Integer # should be replaced with live statistic
+  field :cars_used, type: Integer # should be replaced with live statistic
+  field :areas_explored, type: Integer # should be replaced with live statistic
+  field :filtered_upload, type: Boolean # ?
+  field :instant_delete, type: Boolean # seems useless
+  field :active, type: Integer # ?
+  field :debug, type: Integer # ?
+  field :recover, type: Boolean
+  field :avatar_type, type: String # seems useless
 
-  ## Trackable
-  field :sign_in_count,      type: Integer, default: 0
-  field :current_sign_in_at, type: Time
-  field :last_sign_in_at,    type: Time
-  field :current_sign_in_ip, type: String
-  field :last_sign_in_ip,    type: String
-
-  ## Confirmable
-  # field :confirmation_token,   type: String
-  # field :confirmed_at,         type: Time
-  # field :confirmation_sent_at, type: Time
-  # field :unconfirmed_email,    type: String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,       type: Time
+  # RELATIONS
+  has_one :achievment # IMPORTANT! EXPLOARE BETTER RELATION TYPE HERE
+  belongs_to :country
+  has_many :tracks
+  # # # # # # # # #
 end
