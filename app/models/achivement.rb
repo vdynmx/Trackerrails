@@ -1,4 +1,4 @@
-class Achievement
+class Achivement
   include Mongoid::Document
 
   field :distance, type: Float
