@@ -20,11 +20,11 @@ class User
   # # # # # # #
 
   # CUSTOM FIELDS
+  field :token, type: String
   field :member_since, type: DateTime
   field :last_seen, type: DateTime
   field :role, type: String # can be one of ['admin', 'customer']
   field :activation, type: String # ?
-  field :profile_key, type: String # ?
   ## field :profile_views, type: Integer # should be replaced with live statistic
   ## field :tracks_count, type: Integer # should be replaced with live statistic
   ## field :news_count, type: Integer # should be replaced with live statistic
@@ -43,4 +43,9 @@ class User
   belongs_to :country
   has_many :tracks
   # # # # # # # # #
+
+  def self.find_by_token token
+    # STUB
+    User.where(email: 'cybdoom@gmail.com').first
+  end
 end

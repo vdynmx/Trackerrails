@@ -23,16 +23,14 @@ class Sender
     track_points_count = rand(100..1000)
     generate_random_track_points track_points_count
 
-    meta = {
-      title: "Random track",
-      desc: "",
-      device: "Emulator",
-      privacy: "PRIVATE"
+    @package = {
+      track: {
+        title: "Random track",
+        description: "",
+        device: "Emulator",
+        points: @track_points
+      }
     }
-
-    @package = meta.merge({
-      points: @track_points,
-    })
   end
 
   def get_random_track_point

@@ -14,8 +14,8 @@ class Point
   ## field :timeinterval,      type: Float # ?
   field :timestamp,         type: DateTime
   # field :epoch,             type: Integer # OVERHEAD
-  field :segment,           type: Integer # ?
-  field :privacy_area,      type: Integer # ?
+  # field :segment,           type: Integer # ?
+  # field :privacy_area,      type: Integer # ?
   # # # # # # # # #
 
   embedded_in :track
