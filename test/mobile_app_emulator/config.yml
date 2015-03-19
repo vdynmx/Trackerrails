@@ -1,0 +1,5 @@
+default:
+  api:
+    server: 'localhost'
+    port: 3000
+    tracks_entry: 'tracks'
