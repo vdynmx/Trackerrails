@@ -25,6 +25,7 @@ class Track
   ## field :segments_count, type: Integer
   # field :cache_hash, type: string # ???
   # field :privacy_option, type: String # ?
+  field :private, type: Boolean
   field :timestamp, type: DateTime
   field :recover, type: Integer
   # # # # # # # # #

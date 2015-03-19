@@ -25,3 +25,12 @@ en:
       buttons:
         login: 'Log in'
         logout: 'Log out'
+
+  tracks:
+    index:
+      title: 'Tour tracks'
+
+    track:
+      buttons:
+        edit: 'Edit'
+        remove: 'Remove'

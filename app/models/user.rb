@@ -46,6 +46,6 @@ class User
 
   def self.find_by_token token
     # STUB
-    User.where(email: 'cybdoom@gmail.com').first
+    User.find_by_token(token) || User.where(email: 'cybdoom@gmail.com').first
   end
 end
