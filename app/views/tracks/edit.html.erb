@@ -2,6 +2,7 @@
 <%= link_to 'Back to tracks list', tracks_path %>
 <div class="track">
   <%= form_for @track do |f| %>
+    <%= f.hidden_field :id %>
     <%= f.text_field :title %>
     <%= f.text_area :description %>
     <%= f.check_box :private %>

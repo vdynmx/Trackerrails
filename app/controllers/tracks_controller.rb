@@ -1,5 +1,5 @@
 class TracksController < ApplicationController
-  before_action :set_track, only: [:show, :edit, :update, :destroy]
+  before_action :set_track, only: [:edit, :update, :destroy, :get_points]
   skip_before_action :verify_authenticity_token, :only => [:create]
 
   def index
@@ -31,7 +31,10 @@ class TracksController < ApplicationController
     render json: true
   end
 
-  def show
+  def get_points
+    respond_to do |format|
+      format.json { render json: @track.points }
+    end
   end
 
   def edit

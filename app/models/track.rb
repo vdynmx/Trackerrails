@@ -9,7 +9,7 @@ class Track
   # column "ip", :string # ?
   field :title, type: String
   field :description, type: String
-  field :device, type: String # for what purpose ?
+  # field :device, type: String # for what purpose ?
   ## field :duration, type: Integer
   ## field :moving_time, type: Integer
   ## field :speed_avg, type: float
@@ -32,7 +32,6 @@ class Track
 
   # REFERENES
   belongs_to :user
-  embeds_many :waypoints
   embeds_many :points
   # # # # # # # # # #
 end

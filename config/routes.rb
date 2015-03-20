@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   root 'dashboard#index'
 
-  resources :tracks
+  resources :tracks do
+    member do
+      get :get_points
+    end
+  end
 
 end
