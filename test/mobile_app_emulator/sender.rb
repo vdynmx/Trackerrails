@@ -6,7 +6,8 @@ class Sender
   end
 
   def send_package
-    generate_package
+    #generate_random_package
+    generate_smart_package
     return unless @package
 
     RestClient.post @url, @package.to_json, {:content_type => :json, :accept => :json} {}
@@ -46,7 +47,28 @@ class Sender
     count.times { @track_points << get_random_track_point }
   end
 
-  def generate_package
+  def generate_smart_track_points count
+    @track_points = []
+    point = get_random_track_point
+    count.times do
+      @track_points << point
+      time_delta = rand 60..180
+      alt_delta = rand -10..10
+      lng_delta = rand -0.000005..000005
+      lat_delta = rand -0.0001..0.0001
+      speed_delta = rand -5..5
+      point = [
+        point[0] + time_delta,
+        point[1] + lat_delta,
+        point[2] + lng_delta,
+        point[3] + alt_delta,
+        point[4] + speed_delta
+      ]
+      @track_points << point
+    end
+  end
+
+  def generate_random_package
     track_points_count = rand 100..1000
     generate_random_track_points track_points_count
     generate_waypoints
@@ -55,9 +77,27 @@ class Sender
       track: {
         title: "Random track",
         description: "",
-        #device: "Emulator",
+        device: "Emulator",
         points: @track_points,
-        waypoints: @waypoints
+        waypoints: @waypoints,
+        private: rand(0..1) == 0
+      }
+    }
+  end
+
+  def generate_smart_package
+    track_points_count = rand 10..50
+    generate_smart_track_points track_points_count
+    generate_waypoints
+
+    @package = {
+      track: {
+        title: "Smart generated track",
+        description: "",
+        device: "Emulator",
+        points: @track_points,
+        waypoints: @waypoints,
+        private: rand(0..1) == 0
       }
     }
   end
@@ -67,6 +107,7 @@ class Sender
       Time.new,
       rand(-90..89) + rand, # latitude
       rand(-180..179) + rand, # longtitude
+      rand(50..149) + rand, # altitude
       rand(0..10) # speed
     ]
   end

@@ -28,6 +28,7 @@ class TracksController < ApplicationController
         timestamp: point_data[0],
         latitude: point_data[1],
         longtitude: point_data[2],
+        altitude: point_data[3],
         speed: point_data[4]
       })
     end
@@ -41,6 +42,7 @@ class TracksController < ApplicationController
 
     new_track.points.concat points
     new_track.save
+
     render json: true
   end
 
@@ -57,6 +59,8 @@ class TracksController < ApplicationController
   end
 
   def destroy
+    @track.destroy
+    redirect_to tracks_path
   end
 
   private

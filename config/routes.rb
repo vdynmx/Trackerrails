@@ -9,5 +9,4 @@ Rails.application.routes.draw do
       get :get_points
     end
   end
-
 end

@@ -8,6 +8,10 @@
     <%= f.check_box :private %>
     <%= f.submit %>
     <div class='track-map'></div>
-    <div>STATS TABLE HERE</div>
+    <% if @track.track_stat %>
+      <div class='track-stats'>
+        <%= render @track.track_stat %>
+      </div>
+    <% end %>
   <% end %>
 </div>
