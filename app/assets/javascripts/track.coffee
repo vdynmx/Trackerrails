@@ -1,7 +1,7 @@
 class Track
   TRACKLINE_COLOR:   '#FF0000',
   TRACKLINE_OPACITY: 1
-  TRACKLINE_WIDTH:   3
+  TRACKLINE_WIDTH:   2
 
   initUi: ->
     @ui =
@@ -17,15 +17,16 @@ class Track
   drawTrack: ->
     OnSuccess = (points) =>
       path = points.map (point) ->
-        new google.maps.LatLng(parseFloat(point.latitude), parseFloat(point.longtitude))
+        if point.waypoint
+          new google.maps.Marker({ position: new google.maps.LatLng(point.longtitude, point.latitude) })
+        new google.maps.LatLng(point.latitude, point.longtitude)
 
-      polyline = new google.maps.Polyline
+      new google.maps.Polyline
         path: path
+        map: @map
         strokeColor:   @TRACKLINE_COLOR,
         strokeOpacity: @TRACKLINE_OPACITY,
         strokeWeight:  @TRACKLINE_WIDTH
-
-      polyline.setMap @map
 
     $.ajax
       url: '/tracks/' + @id + '/get_points'

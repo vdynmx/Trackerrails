@@ -10,11 +10,16 @@ class TracksController < ApplicationController
 
   def create
     attributes = track_params
+
     points = attributes[:points]
     attributes.delete :points
+
+    waypoints = attributes[:waypoints]
+    attributes.delete :waypoints
+
     attributes.merge!({
       timestamp: Time.new,
-      user_id: (User.find_by_token params[:token]).id
+      user_id:   (User.find_by_token params[:token]).id
     })
     new_track = Track.new attributes
 
@@ -26,6 +31,14 @@ class TracksController < ApplicationController
         speed: point_data[4]
       })
     end
+
+    waypoints.each do |waypoint|
+      point_index = waypoint[:point_index]
+      waypoint.delete :point_index
+
+      points[point_index].waypoint = Waypoint.new waypoint
+    end
+
     new_track.points.concat points
     new_track.save
     render json: true
