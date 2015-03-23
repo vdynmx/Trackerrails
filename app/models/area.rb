@@ -1,5 +1,6 @@
 class Area
   include Mongoid::Document
+  include Trackable
 
   # CUSTOM FIELDS
   # field :idx, type: Integer # ?

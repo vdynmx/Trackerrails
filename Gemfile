@@ -50,5 +50,6 @@ gem 'devise'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'rmagick'
+gem 'mongoid-audit'
 
 gem 'geodesic', source: 'http://gemcutter.org'

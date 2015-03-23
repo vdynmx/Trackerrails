@@ -2,6 +2,7 @@ require 'geodesic'
 
 class Track
   include Mongoid::Document
+  include Trackable
 
   # ODM CALLBACKS
   before_save { |record| calculate_track_stats record }
