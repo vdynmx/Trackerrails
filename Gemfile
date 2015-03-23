@@ -42,9 +42,13 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'bootstrap-sass'
+
 gem 'mongoid', '~> 4.0.0'
 
 gem 'devise'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'rmagick'
+
+gem 'geodesic', source: 'http://gemcutter.org'
