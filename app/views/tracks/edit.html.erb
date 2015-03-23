@@ -9,6 +9,7 @@
     <div class='track-map-container'>
       <div class='track-map'></div>
       <div class='cropper'></div>
+      <%= link_to 'Crop', crop_track_path, method: :put %>
     </div>
     <% if @track.track_stat %>
       <div class='track-stats'>

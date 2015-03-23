@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :tracks do
     member do
       get :get_points
+      put :crop
     end
   end
 end

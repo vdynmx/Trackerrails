@@ -1,5 +1,5 @@
 class TracksController < ApplicationController
-  before_action :set_track, only: [:edit, :update, :destroy, :get_points]
+  before_action :set_track, only: [:edit, :crop, :update, :destroy, :get_points]
   skip_before_action :verify_authenticity_token, :only => [:create]
 
   def index
@@ -56,6 +56,13 @@ class TracksController < ApplicationController
   def edit
   end
 
+  def crop
+    new_begin_index, new_end_index = params[:begin], params[:end]
+    @track.points = @track.points[new_begin_index..new_end_index]
+    @track.save
+    redirect_to tracks_path
+  end
+
   def update
     @track.update_attributes track_params
     redirect_to tracks_path
@@ -70,6 +77,10 @@ class TracksController < ApplicationController
 
   def track_params
     params.require(:track).permit!
+  end
+
+  def crop_params
+    params.require(:crop).permit(:begin, :end)
   end
 
   def set_track
