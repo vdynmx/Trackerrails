@@ -54,8 +54,8 @@ class Sender
       @track_points << point
       time_delta = rand 60..180
       alt_delta = rand -10..10
-      lng_delta = rand -0.000005..000005
-      lat_delta = rand -0.0001..0.0001
+      lng_delta = rand -0.0001 + rand() * 0.005
+      lat_delta = rand -0.0001 + rand() * 0.005
       speed_delta = rand -5..5
       point = [
         point[0] + time_delta,

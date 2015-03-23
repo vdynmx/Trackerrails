@@ -19,6 +19,8 @@ class Point
   # field :privacy_area,      type: Integer # ?
   # # # # # # # # #
 
+  # RELATIONS
   embeds_one :waypoint
   embedded_in :track
+  # # # # # #
 end

@@ -41,6 +41,7 @@ class TracksController < ApplicationController
     end
 
     new_track.points.concat points
+
     new_track.save
 
     render json: true

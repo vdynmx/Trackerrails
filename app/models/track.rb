@@ -5,7 +5,7 @@ class Track
   include Trackable
 
   # ODM CALLBACKS
-  before_save { |record| calculate_track_stats record }
+  before_save :calculate_track_stats
   # # # # # # # #
 
   # SCOPES
@@ -45,8 +45,8 @@ class Track
 
   private
 
-  def calculate_track_stats track
-    points = track.points
+  def calculate_track_stats
+    points = self.points
     stats = {
       duration: Time.at(points.last.timestamp.to_f - points.first.timestamp.to_f),
       distance: 0.0,
@@ -65,11 +65,13 @@ class Track
       speed_acc += point.speed
 
       next_point = points[index + 1]
-      point.update_attribute :distance_to_next, next_point ? Geodesic::dist_haversine(point.latitude, point.longtitude, next_point.latitude, next_point.longtitude) : 0
+      point.set distance_to_next: (next_point ? Geodesic::dist_haversine(point.latitude, point.longtitude, next_point.latitude, next_point.longtitude) : 0)
     end
 
-    stats[:avg_speed] = points.try(:any?) ? speed_acc / points.count : 0
+    stats[:avg_speed] = 0#points.try(:any?) ? speed_acc / points.count : 0
 
-    track.build_track_stat stats
+    self.build_track_stat stats
   end
+
+
 end

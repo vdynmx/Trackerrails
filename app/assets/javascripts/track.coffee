@@ -16,9 +16,11 @@ class Track
 
   drawTrack: ->
     OnSuccess = (points) =>
-      path = points.map (point) ->
+      path = points.map (point) =>
         if point.waypoint
-          new google.maps.Marker({ position: new google.maps.LatLng(point.longtitude, point.latitude) })
+          new google.maps.Marker
+            position: new google.maps.LatLng(point.latitude, point.longtitude)
+            map: @map
         new google.maps.LatLng(point.latitude, point.longtitude)
 
       new google.maps.Polyline
