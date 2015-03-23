@@ -8,6 +8,13 @@ class Track
       map:     $ '.track-map'
       cropper: $ '.cropper'
 
+    maxValue = @points.length - 1
+    @ui.cropper.slider
+      range: true
+      min: 0
+      max: maxValue
+      values: [0, maxValue]
+
   setEventHandlers: ->
     @ui.cropper.on 'change', ->
 

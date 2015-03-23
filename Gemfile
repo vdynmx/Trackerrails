@@ -43,6 +43,7 @@ group :development, :test do
 end
 
 gem 'bootstrap-sass'
+gem 'jquery-ui-rails', '>= 5.0.0'
 
 gem 'mongoid', '~> 4.0.0'
 
