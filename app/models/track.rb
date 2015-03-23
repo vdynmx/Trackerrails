@@ -1,3 +1,5 @@
+require 'geodesic'
+
 class Track
   include Mongoid::Document
 
@@ -54,12 +56,15 @@ class Track
 
     speed_acc = 0.0
 
-    points.each do |point|
+    points.each_with_index do |point, index|
       stats[:distance] += point.distance_to_next
       stats[:top_speed] = point.speed if point.speed > stats[:top_speed]
       stats[:min_altitude] = point.altitude if point.altitude < stats[:min_altitude]
       stats[:max_altitude] = point.altitude if point.altitude > stats[:max_altitude]
       speed_acc += point.speed
+
+      next_point = points[index + 1]
+      point.update_attribute :distance_to_next, next_point ? Geodesic::dist_haversine(point.latitude, point.longtitude, next_point.latitude, next_point.longtitude) : 0
     end
 
     stats[:avg_speed] = points.try(:any?) ? speed_acc / points.count : 0

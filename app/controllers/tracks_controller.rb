@@ -56,6 +56,8 @@ class TracksController < ApplicationController
   end
 
   def update
+    @track.update_attributes track_params
+    redirect_to tracks_path
   end
 
   def destroy

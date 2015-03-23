@@ -1,7 +1,18 @@
-<br>
-<%= track.title %>
-<%= track.description %>
-<%= track.private %>
-<%= track.timestamp %>
-<%= link_to t('tracks.track.buttons.edit'), edit_track_path(track) %>
-<%= link_to t('tracks.track.buttons.remove'), track_path(track), method: :delete %>
+<li>
+  <div class="track-entry">
+    <div class="col-md-4">
+      <%= track.title %>
+    </div>
+    <div class="col-md-4">
+      <%= track.timestamp.to_formatted_s :long %>
+    </div>
+    <div class="col-md-4">
+      <%= link_to t('tracks.track.buttons.edit'), edit_track_path(track) %>
+      |
+      <%= link_to t('tracks.track.buttons.remove'), track_path(track), method: :delete %>
+    </div>
+    <div class="desc">
+      <%= track.description %>
+    </div>
+  </div>
+</li>
