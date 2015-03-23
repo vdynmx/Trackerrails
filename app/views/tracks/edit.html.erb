@@ -1,5 +1,6 @@
 <%= link_to 'Back to tracks list', tracks_path %>
 <div class="track">
+
   <%= form_for @track do |f| %>
     <%= f.hidden_field :id %>
     <%= f.text_field :title %>
@@ -9,7 +10,6 @@
     <div class='track-map-container'>
       <div class='track-map'></div>
       <div class='cropper'></div>
-      <%= link_to 'Crop', crop_track_path, method: :put %>
     </div>
     <% if @track.track_stat %>
       <div class='track-stats'>
@@ -17,4 +17,9 @@
       </div>
     <% end %>
   <% end %>
+
+  <%= form_tag({action: :crop}, method: :put) %>
+    <%= hidden_field_tag :begin, '0' %>
+    <%= hidden_field_tag :end, "#{ @track.points.length - 1 }" %>
+    <%= submit_tag 'Crop' %>
 </div>

@@ -57,7 +57,7 @@ class TracksController < ApplicationController
   end
 
   def crop
-    new_begin_index, new_end_index = params[:begin], params[:end]
+    new_begin_index, new_end_index = params[:begin].to_i, params[:end].to_i
     @track.points = @track.points[new_begin_index..new_end_index]
     @track.save
     redirect_to tracks_path

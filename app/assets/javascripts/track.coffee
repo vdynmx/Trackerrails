@@ -5,8 +5,10 @@ class Track
 
   initUi: ->
     @ui =
-      map:     $ '.track-map'
-      cropper: $ '.cropper'
+      map:        $ '.track-map'
+      cropper:    $ '.cropper'
+      beginInput: $ '#begin'
+      endInput:   $ '#end'
 
     maxValue = @points.length - 1
     self = this
@@ -15,10 +17,16 @@ class Track
       min: 0
       max: maxValue
       values: [0, maxValue]
-      slide: =>
-        @leftEnd = self.ui.cropper.slider 'values', 0
-        @rightEnd = self.ui.cropper.slider 'values', 1
-        @redrawCropMarkers()
+      slide: ->
+        setTimeout ->
+          self.leftEnd = self.ui.cropper.slider 'values', 0
+          self.rightEnd = self.ui.cropper.slider 'values', 1
+
+          self.redrawCropMarkers()
+
+          self.ui.beginInput.val self.leftEnd
+          self.ui.endInput.val self.rightEnd
+        , 100
 
   drawMap: ->
     mapOptions =
