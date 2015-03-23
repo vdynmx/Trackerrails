@@ -5,7 +5,11 @@ class Track
 
   initUi: ->
     @ui =
-      map: $ '.track-map'
+      map:     $ '.track-map'
+      cropper: $ '.cropper'
+
+  setEventHandlers: ->
+    @ui.cropper.on 'change', ->
 
   drawMap: ->
     mapOptions =
@@ -14,32 +18,38 @@ class Track
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map @ui.map[0], mapOptions
 
-  drawTrack: ->
+  loadPoints: (successCallback) ->
     OnSuccess = (points) =>
-      path = points.map (point) =>
-        if point.waypoint
-          new google.maps.Marker
-            position: new google.maps.LatLng(point.latitude, point.longtitude)
-            map: @map
+      @points = points.map (point) ->
         new google.maps.LatLng(point.latitude, point.longtitude)
-
-      new google.maps.Polyline
-        path: path
-        map: @map
-        strokeColor:   @TRACKLINE_COLOR,
-        strokeOpacity: @TRACKLINE_OPACITY,
-        strokeWeight:  @TRACKLINE_WIDTH
+      successCallback()
 
     $.ajax
       url: '/tracks/' + @id + '/get_points'
       method: 'GET'
       success: OnSuccess
 
+  drawTrack: ->
+    @points.forEach (point) =>
+      if point.waypoint
+        new google.maps.Marker
+          position: new google.maps.LatLng(point.latitude, point.longtitude)
+          map: @map
+
+      new google.maps.Polyline
+        path: @points
+        map: @map
+        strokeColor:   @TRACKLINE_COLOR,
+        strokeOpacity: @TRACKLINE_OPACITY,
+        strokeWeight:  @TRACKLINE_WIDTH
+
   constructor: (html) ->
     @id = $(html).find('#track_id').attr 'value'
-    @initUi()
-    @drawMap()
-    @drawTrack()
+    @loadPoints =>
+      @initUi()
+      @drawMap()
+      @drawTrack()
+      @setEventHandlers()
 
 $ ->
   $.each $('.track'), (_, trackElement) ->

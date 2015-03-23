@@ -6,7 +6,10 @@
     <%= f.text_area :description %>
     <%= f.check_box :private %>
     <%= f.submit %>
-    <div class='track-map'></div>
+    <div class='track-map-container'>
+      <div class='track-map'></div>
+      <div class='cropper'></div>
+    </div>
     <% if @track.track_stat %>
       <div class='track-stats'>
         <%= render @track.track_stat %>
